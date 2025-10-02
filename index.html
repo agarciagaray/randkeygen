@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO básico -->
+  <title>Generador de Contraseñas Seguras - Seguro, Rápido y Gratis</title>
+  <meta name="description" content="Genera contraseñas seguras, aleatorias y fuertes con un solo clic. Aplicación gratuita, sin registros ni rastreos. ¡Protege tus cuentas ahora!">
+  <meta name="keywords" content="generador de contraseñas, contraseñas seguras, claves fuertes, seguridad online, protección de cuentas, passwords aleatorios, contraseña segura gratis">
+  <meta name="author" content="Alejandro García Garay">
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://tusitio.com/" /> <!-- Reemplaza con tu dominio real -->
+
+  <!-- Información de licencia y descargo de responsabilidad -->
+  <meta name="license" content="Licencia de uso libre. El autor no se hace responsable por el mal uso o fallas en la seguridad derivadas del uso de esta aplicación.">
+  <meta name="copyright" content="© Alejandro García Garay. Uso libre bajo tu responsabilidad.">
+  <meta name="reply-to" content="agarciagaray@pm.me">
+
+  <!-- Open Graph (para compartir en redes sociales) -->
+  <meta property="og:title" content="Generador de Contraseñas Seguras" />
+  <meta property="og:description" content="Herramienta gratuita para generar contraseñas seguras y aleatorias." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tusitio.com/" /> <!-- Reemplaza con tu dominio -->
+  <meta property="og:image" content="https://tusitio.com/imagen.png" /> <!-- Opcional -->
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Generador de Contraseñas Seguras" />
+  <meta name="twitter:description" content="Crea contraseñas fuertes y seguras al instante, sin costo." />
+  <meta name="twitter:image" content="https://tusitio.com/imagen.png" /> <!-- Opcional -->
+
+  <!-- Datos estructurados para SEO (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Generador de Contraseñas Seguras",
+      "operatingSystem": "Web",
+      "applicationCategory": "SecurityApplication",
+      "description": "Genera contraseñas fuertes, aleatorias y seguras sin costo alguno.",
+      "author": {
+        "@type": "Person",
+        "name": "Alejandro García Garay",
+        "email": "agarciagaray@pm.me"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
+
+  <!-- Favicon (opcional) -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #7209b7;
+      --success: #06d6a0;
+      --warning: #ffd166;
+      --danger: #ef476f;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1d2b64, #f8cdda);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 30px;
+      margin: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: var(--gray);
+      font-size: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .length-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    #password-length {
+      flex: 1;
+    }
+
+    #length-value {
+      font-weight: bold;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #e9ecef;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      background: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    .options-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .option input {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .option label {
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: var(--border-radius);
+      background-color: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-copy {
+      background-color: var(--secondary);
+    }
+
+    .btn-copy:hover {
+      background-color: #5e0d9b;
+    }
+
+    .result-container {
+      margin: 25px 0;
+      position: relative;
+    }
+
+    #password-result {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e9ecef;
+      border-radius: var(--border-radius);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--dark);
+      background-color: #f8f9fa;
+      text-align: center;
+      letter-spacing: 1px;
+      user-select: all;
+    }
+
+    .copy-container {
+      position: relative;
+    }
+
+    .strength-container {
+      margin: 20px 0 30px;
+    }
+
+    .strength-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .strength-bar {
+      height: 8px;
+      border-radius: 4px;
+      background-color: #e9ecef;
+      overflow: hidden;
+    }
+
+    .strength-fill {
+      height: 100%;
+      width: 0%;
+      transition: var(--transition);
+    }
+
+    .strength-weak {
+      background-color: var(--danger);
+      width: 33%;
+    }
+
+    .strength-medium {
+      background-color: var(--warning);
+      width: 66%;
+    }
+
+    .strength-strong {
+      background-color: var(--success);
+      width: 100%;
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      background-color: var(--success);
+      color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transform: translateX(150%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .options-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>🔒 Generador de Contraseñas Seguras</h1>
+      <p class="subtitle">Crea contraseñas fuertes y seguras para proteger tus cuentas</p>
+    </header>
+
+    <div class="form-group">
+      <label for="password-length">Longitud: <span id="length-value">12</span></label>
+      <div class="length-container">
+        <input type="range" id="password-length" min="8" max="20" value="12">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Opciones:</label>
+      <div class="options-container">
+        <div class="option">
+          <input type="checkbox" id="uppercase" checked>
+          <label for="uppercase">Letras mayúsculas (A-Z)</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="lowercase" checked>
+          <label for="lowercase">Letras minúsculas (a-z)</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="numbers" checked>
+          <label for="numbers">Números (0-9)</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="symbols" checked>
+          <label for="symbols">Símbolos (!@#$)</label>
+        </div>
+      </div>
+    </div>
+
+    <button id="generate-btn" class="btn">Generar Contraseña</button>
+
+    <div class="result-container">
+      <input type="text" id="password-result" readonly placeholder="Tu contraseña aparecerá aquí">
+    </div>
+
+    <div class="copy-container">
+      <button id="copy-btn" class="btn btn-copy">Copiar Contraseña</button>
+    </div>
+
+    <div class="strength-container">
+      <div class="strength-header">
+        <span>Fortaleza:</span>
+        <span id="strength-text">-</span>
+      </div>
+      <div class="strength-bar">
+        <div id="strength-fill" class="strength-fill"></div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Genera contraseñas seguras y únicas para proteger tu información personal</p>
+    </footer>
+  </div>
+
+  <div class="notification" id="notification">¡Contraseña copiada al portapapeles!</div>
+
+  <script>
+    // Elementos del DOM
+    const passwordLength = document.getElementById('password-length');
+    const lengthValue = document.getElementById('length-value');
+    const uppercase = document.getElementById('uppercase');
+    const lowercase = document.getElementById('lowercase');
+    const numbers = document.getElementById('numbers');
+    const symbols = document.getElementById('symbols');
+    const generateBtn = document.getElementById('generate-btn');
+    const passwordResult = document.getElementById('password-result');
+    const copyBtn = document.getElementById('copy-btn');
+    const strengthFill = document.getElementById('strength-fill');
+    const strengthText = document.getElementById('strength-text');
+    const notification = document.getElementById('notification');
+
+    // Actualizar valor de longitud
+    passwordLength.addEventListener('input', () => {
+      lengthValue.textContent = passwordLength.value;
+    });
+
+    // Generar contraseña
+    generateBtn.addEventListener('click', () => {
+      const length = parseInt(passwordLength.value);
+      const includeUppercase = uppercase.checked;
+      const includeLowercase = lowercase.checked;
+      const includeNumbers = numbers.checked;
+      const includeSymbols = symbols.checked;
+
+      // Validar que al menos una opción esté seleccionada
+      if (!includeUppercase && !includeLowercase && !includeNumbers && !includeSymbols) {
+        alert('Por favor, selecciona al menos un tipo de carácter para tu contraseña');
+        return;
+      }
+
+      // Generar la contraseña
+      const password = generatePassword(length, includeUppercase, includeLowercase, includeNumbers, includeSymbols);
+      passwordResult.value = password;
+
+      // Evaluar fortaleza
+      evaluatePasswordStrength(password);
+    });
+
+    // Función para generar contraseña
+    function generatePassword(length, upper, lower, num, sym) {
+      let charSet = '';
+      const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+      const numberChars = '0123456789';
+      const symbolChars = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+
+      if (upper) charSet += uppercaseChars;
+      if (lower) charSet += lowercaseChars;
+      if (num) charSet += numberChars;
+      if (sym) charSet += symbolChars;
+
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * charSet.length);
+        password += charSet[randomIndex];
+      }
+
+      return password;
+    }
+
+    // Evaluar fortaleza de la contraseña
+    function evaluatePasswordStrength(password) {
+      let strength = 0;
+      const length = password.length;
+
+      // Basado en longitud
+      if (length >= 8) strength += 20;
+      if (length >= 12) strength += 20;
+      if (length >= 16) strength += 20;
+
+      // Basado en diversidad de caracteres
+      if (/[A-Z]/.test(password)) strength += 15;
+      if (/[a-z]/.test(password)) strength += 15;
+      if (/[0-9]/.test(password)) strength += 15;
+      if (/[^A-Za-z0-9]/.test(password)) strength += 15;
+
+      // Ajustar a 100 como máximo
+      strength = Math.min(strength, 100);
+
+      // Actualizar UI
+      strengthFill.classList.remove('strength-weak', 'strength-medium', 'strength-strong');
+
+      if (strength < 50) {
+        strengthFill.classList.add('strength-weak');
+        strengthText.textContent = 'Débil';
+        strengthText.style.color = '#ef476f';
+      } else if (strength < 80) {
+        strengthFill.classList.add('strength-medium');
+        strengthText.textContent = 'Media';
+        strengthText.style.color = '#ffd166';
+      } else {
+        strengthFill.classList.add('strength-strong');
+        strengthText.textContent = 'Fuerte';
+        strengthText.style.color = '#06d6a0';
+      }
+    }
+
+    // Copiar contraseña al portapapeles
+    copyBtn.addEventListener('click', () => {
+      if (!passwordResult.value) {
+        alert('Primero genera una contraseña');
+        return;
+      }
+
+      passwordResult.select();
+      document.execCommand('copy');
+
+      // Mostrar notificación
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 2000);
+    });
+
+    // Generar una contraseña al cargar la página
+    window.addEventListener('load', () => {
+      generateBtn.click();
+    });
+  </script>
+</body>
+
+</html>
